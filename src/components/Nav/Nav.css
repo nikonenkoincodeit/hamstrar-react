@@ -1,0 +1,15 @@
+.list-items {
+  display: flex;
+  align-items: center;
+  height: inherit;
+}
+
+.list-items .item {
+  list-style: none;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.list-items a {
+  text-decoration: none;
+}
