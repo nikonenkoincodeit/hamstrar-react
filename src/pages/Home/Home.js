@@ -1,33 +1,51 @@
-import {createRef, useState } from 'react'
+//import { createRef, useState } from "react";
+import { Link } from "react-router-dom";
+import "./Home.css";
 
 export default function Home() {
-  const textInput = createRef();
+  // const textInput = createRef();
 
-  const [output, setOutput] = useState('hello')
+  // const [output, setOutput] = useState("hello");
 
-  const f1 = (payload) => () => {
-    console.log(payload)
-  }
-  const f2 = () => {
-    console.log(this)
-    console.log('over');
-  }
-  const f3 = (event) => {
-    setOutput(textInput.current.value);
-    //console.log(event.target.value)
-  }
+  // const f1 = (payload) => () => {
+  //   console.log(payload);
+  // };
+  // const f2 = () => {
+  //   console.log(this);
+  //   console.log("over");
+  // };
+  // const f3 = (event) => {
+  //   setOutput(textInput.current.value);
+  //   //console.log(event.target.value)
+  // };
 
   return (
     <>
-      <div>
-        <h3 onClick={f1(222)} onMouseOver={f2}>
+      <div className="hunter">
+        <div className="container">
+          <div className="row">
+            <div className="right-box">
+              <h1 className="hunter-title">
+                Hamster <span>WARS</span>
+              </h1>
+            </div>
+
+            <div className="left-box">
+              <p className="hunter-text">
+                Push the <span className="color_red">RED</span> button to
+                START...
+              </p>
+              <Link to="/battle" className="link">
+                battle
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* <h3 onClick={f1(222)} onMouseOver={f2}>
           Home page
-        </h3>
+        </h3> */}
       </div>
-      <div>
-        <input type="text" onInput={f3} ref={textInput} defaultValue="111" />
-      </div>
-      <h1>{output}</h1>
     </>
   );
 }

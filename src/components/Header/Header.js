@@ -1,19 +1,20 @@
-import Nav from '../Nav';
-import './Header.css';
+import Nav from "../Nav";
+import "./Header.css";
 
 const menuItems = [
-  { link: '/', text: 'home' },
-  { link: '/about', text: 'about' },
-  { link: '/contacts', text: 'contacts' },
-  { link: '/blog', text: 'blog' },
-  { link: '/users', text: 'users' },
+  { link: "/", text: "home" },
+  { link: "/battle", text: "game" },
+  { link: "/gallery", text: "ALL members (ADD Yuor)" },
+  { link: "/statistics", text: "statistics" },
 ];
 
 export default function Header(props) {
   return (
     <header className="header">
-      <div className="content">
-        <Nav menuItems={menuItems} />
+      <div className="container">
+        <nav className="nav">
+          <Nav menuItems={menuItems} />
+        </nav>
       </div>
     </header>
   );

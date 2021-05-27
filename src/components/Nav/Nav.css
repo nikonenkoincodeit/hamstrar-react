@@ -13,3 +13,11 @@
 .list-items a {
   text-decoration: none;
 }
+
+.item a {
+  display: inline-block;
+  padding: 30px 30px 30px 0;
+}
+
+.nav {
+}
