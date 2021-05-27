@@ -12,6 +12,13 @@
 
 .list-items a {
   text-decoration: none;
+  font-family: "Coustard", serif;
+  font-size: 18px;
+  color: #fff;
+}
+
+.list-items a.active {
+  color: #2f80ed;
 }
 
 .item a {

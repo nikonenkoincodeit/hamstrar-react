@@ -6,6 +6,7 @@ const menuItems = [
   { link: "/battle", text: "game" },
   { link: "/gallery", text: "ALL members (ADD Yuor)" },
   { link: "/statistics", text: "statistics" },
+  { link: "/history", text: "history" },
 ];
 
 export default function Header(props) {
