@@ -46,3 +46,7 @@
   width: calc((100% - 60px) / 3);
   padding: 20px;
 }
+
+.box-battle .hamstrar-cart {
+  margin-bottom: 0;
+}
