@@ -11,12 +11,17 @@
 html,
 body {
   width: 100%;
-  height: 100%;
-  font-family: "Coustard", serif;
+  font-family: "Noto Sans JP", sans-serif;
 }
 
 a {
   text-decoration: none;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .container {
@@ -33,4 +38,23 @@ a {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
+}
+
+.box-battle,
+.box-gallery {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  padding: 200px 0 100px 0;
+}
+
+.gallery-cart,
+.hamstrar-cart {
+  position: relative;
+  border: 15px solid #ccc;
+  width: calc((100% - 60px) / 3);
+  cursor: pointer;
+  overflow: hidden;
+  margin-bottom: 30px;
 }
