@@ -39,6 +39,7 @@ button {
 
 .page-wrapper {
   width: 100%;
+  min-height: 100vh;
   height: 100%;
   background-image: url("../../assets/images/hamsters.jpg");
   background-repeat: no-repeat;
@@ -56,7 +57,7 @@ button {
 }
 
 .gallery-cart,
-.hamstrar-cart {
+.hamster-cart {
   position: relative;
   border: 15px solid #ccc;
   width: calc((100% - 60px) / 3);

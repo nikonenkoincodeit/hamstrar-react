@@ -1,4 +1,4 @@
-.hamstrar-cart {
+.hamster-cart {
   position: relative;
   border: 15px solid #ccc;
   width: calc((100% - 60px) / 3);
@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-.hamstrar-cart:hover > .overlay {
+.hamster-cart:hover > .overlay {
   transform: translateY(0);
 }
 
@@ -22,7 +22,7 @@
   transition: transform 0.7s ease;
 }
 
-.hamstrar-cart-title,
+.hamster-cart-title,
 .overlay p {
   text-align: center;
   color: #fff;
@@ -32,7 +32,7 @@
   font-weight: 700;
 }
 
-.hamstrar-cart-title {
+.hamster-cart-title {
   font-size: 20px;
   margin-top: 20px;
 }
@@ -47,6 +47,6 @@
   padding: 20px;
 }
 
-.box-battle .hamstrar-cart {
+.box-battle .hamster-cart {
   margin-bottom: 0;
 }

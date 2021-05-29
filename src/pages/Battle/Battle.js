@@ -10,7 +10,7 @@ export default function Battle() {
       <Header />
       <div className="container">
         <div className="box-battle">
-          <div className="hamstrar-cart" onClick={() => getIdHamstrar(1)}>
+          <div className="hamster-cart" onClick={() => getIdHamstrar(1)}>
             <img src={imgH} alt="" />
             <div className="overlay">
               <p>
@@ -26,7 +26,7 @@ export default function Battle() {
                 favorit active: <span>lego</span>
               </p>
               <div>
-                <h3 className="hamstrar-cart-title">Winner!</h3>
+                <h3 className="hamster-cart-title">Winner!</h3>
                 <p>Winner 75 procent</p>
                 <p>looser 25 procent</p>
               </div>
@@ -37,7 +37,7 @@ export default function Battle() {
             click on the picture to choose the winner
           </h1>
 
-          <div className="hamstrar-cart" onClick={() => getIdHamstrar(2)}>
+          <div className="hamster-cart" onClick={() => getIdHamstrar(2)}>
             <img src={imgH2} alt="" />
             <div className="overlay">
               <p>
@@ -53,7 +53,7 @@ export default function Battle() {
                 favorit active: <span>lego</span>
               </p>
               <div>
-                <h3 className="hamstrar-cart-title">Winner!</h3>
+                <h3 className="hamster-cart-title">Winner!</h3>
                 <p>Winner 75 procent</p>
                 <p>looser 25 procent</p>
               </div>

@@ -11,7 +11,7 @@ export default function Gallery() {
 
   let [open, setOpen] = useState(-1);
 
-  let [openForm, setOpenForm] = useState(true);
+  let [openForm, setOpenForm] = useState(false);
 
   const deleteHamster = (id) => {
     console.log(id);
