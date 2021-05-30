@@ -22,6 +22,10 @@
   transition: transform 0.7s ease;
 }
 
+.overlay.active {
+  transform: translateY(0);
+}
+
 .hamster-cart-title,
 .overlay p {
   text-align: center;
@@ -49,4 +53,19 @@
 
 .box-battle .hamster-cart {
   margin-bottom: 0;
+}
+
+.box-battle .hamster-cart.active {
+  border-color: red;
+}
+
+.btn-next {
+  padding: 5px 15px;
+  border-radius: 4px;
+  background: green;
+  color: #fff;
+  display: block;
+  margin: 0 auto;
+  font-size: 16px;
+  font-family: "Noto Sans JP", sans-serif;
 }

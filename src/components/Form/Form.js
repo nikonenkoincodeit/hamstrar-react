@@ -1,4 +1,7 @@
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
+import { addData } from "../../api";
+import { START_OBJECT } from "../../constants";
 import "./Form.css";
 
 export default function Form(props) {
@@ -8,17 +11,21 @@ export default function Form(props) {
     formState: { errors },
   } = useForm();
 
-  const validators = {
-    required: "Не может быть пустым",
-  };
+  const formRef = useRef(null);
 
   const addHamster = (data) => {
-    console.log(data);
+    const new_hamster = { ...data, ...START_OBJECT };
+    formRef.current.reset();
+    props.toggleLoading(true);
+    addData(new_hamster).then((response) => {
+      props.getHamsters();
+      props.togglePopupForm(false);
+    });
   };
 
   return (
     <div className={!!props.open ? "wrapper-form is-open" : "wrapper-form"}>
-      <form className="form" onSubmit={handleSubmit(addHamster)}>
+      <form className="form" onSubmit={handleSubmit(addHamster)} ref={formRef}>
         <h2 className="form-title">add hamster</h2>
         <div
           className="close-form"
@@ -69,50 +76,44 @@ export default function Form(props) {
           )}
         </div>
         <div className="form-field">
-          <label htmlFor="favorit-food">favorit food:</label>
+          <label htmlFor="favFood">favorit food:</label>
           <input
             type="text"
-            id="favorit-food"
-            name="favorit-food"
-            {...register("favorit-food", {
+            id="favFood"
+            name="favFood"
+            {...register("favFood", {
               required: {
                 value: true,
                 message: "Required",
               },
             })}
           />
-          {errors["favorit-food"] && errors["favorit-food"].message && (
-            <p className="error">
-              {errors["favorit-food"] && errors["favorit-food"].message}
-            </p>
+          {errors.favFood && errors.favFood.message && (
+            <p className="error">{errors.favFood && errors.favFood.message}</p>
           )}
         </div>
         <div className="form-field">
           <label htmlFor="favorit-occupation">favorit occupation:</label>
           <input
             type="text"
-            id="favorit-occupation"
-            name="favorit-occupation"
-            {...register("favorit-occupation", {
+            id="loves"
+            name="loves"
+            {...register("loves", {
               required: {
                 value: true,
                 message: "Required",
               },
             })}
           />
-          {errors["favorit-occupation"] &&
-            errors["favorit-occupation"].message && (
-              <p className="error">
-                {errors["favorit-occupation"] &&
-                  errors["favorit-occupation"].message}
-              </p>
-            )}
+          {errors.loves && errors.loves.message && (
+            <p className="error">{errors.loves && errors.loves.message}</p>
+          )}
         </div>
         <div className="form-field">
           <label htmlFor="images">add image</label>
           <select
-            name="images"
-            {...register("images", {
+            name="imgName"
+            {...register("imgName", {
               required: {
                 value: true,
                 message: "Required",
@@ -120,12 +121,15 @@ export default function Form(props) {
             })}
           >
             <option value=""></option>
-            <option value="images 1">images 1</option>
-            <option value="images 2">images 2</option>
-            <option value="images 3">images 3</option>
+            <option value="hamster-7.jpg">hamster-7.jpg</option>
+            <option value="hamster-14.jpg">hamster-14.jpg</option>
+            <option value="hamster-15.jpg">hamster-15.jpg</option>
+            <option value="hamster-16.jpg">hamster-16.jpg</option>
+            <option value="hamster-17.jpg">hamster-17.jpg</option>
+            <option value="hamster-18.jpg">hamster-18.jpg</option>
           </select>
-          {errors.images && errors.images.message && (
-            <p className="error">{errors.images && errors.images.message}</p>
+          {errors.imgName && errors.imgName.message && (
+            <p className="error">{errors.imgName && errors.imgName.message}</p>
           )}
         </div>
         <button type="submit" className="btn-add-hamster">

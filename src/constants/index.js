@@ -1,7 +1,9 @@
-export const BASE_URL = "https://my-beck-end.herokuapp.com/";
+export const BASE_URL = "https://hamstersapi.herokuapp.com/";
 
-export const HAMSTERS_URL = "hamsters";
+export const HAMSTERS_URL = "hamsters/";
 
 export const IMG_URL = "img/";
 
-export const API_URL = "api/";
+export const RANDOM_URL = "random";
+
+export const START_OBJECT = { defeats: 0, games: 0, wins: 0 };

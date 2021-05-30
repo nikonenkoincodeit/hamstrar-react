@@ -1,25 +1,40 @@
-export default function HamsterCart(props) {
+import { BASE_URL, IMG_URL } from "../../constants";
+export default function HamsterCart({
+  index,
+  randomData,
+  getIdHamster,
+  winner,
+}) {
+  const data = randomData[index];
+
   return (
-    <div className="hamster-cart" onClick={() => props.getIdHamster(1)}>
-      <img src={props.img} alt="" />
-      <div className="overlay">
+    <div
+      className={winner === index ? "hamster-cart active" : "hamster-cart"}
+      onClick={() => getIdHamster(index)}
+    >
+      <img src={BASE_URL + IMG_URL + data.imgName} alt="" />
+      <div className={winner > -1 ? "overlay active" : "overlay"}>
         <p>
-          name: <span>piter pan</span>
+          name: <span>{data.name}</span>
         </p>
         <p>
-          age: <span>6</span>
+          age: <span>{data.age}</span>
         </p>
         <p>
-          favorit food: <span>kitchen</span>
+          favorit food: <span>{data.favFood}</span>
         </p>
         <p>
-          favorit active: <span>lego</span>
+          favorit active: <span>{data.loves}</span>
         </p>
-        <div>
-          <h3 className="hamster-cart-title">Winner!</h3>
-          <p>Winner 75 procent</p>
-          <p>looser 25 procent</p>
-        </div>
+        {winner > -1 && (
+          <div>
+            <h3 className="hamster-cart-title">
+              {winner === index ? "Winner!" : "Looser"}
+            </h3>
+            <p>Winner {data.wins} </p>
+            <p>looser {data.defeats}</p>
+          </div>
+        )}
       </div>
     </div>
   );

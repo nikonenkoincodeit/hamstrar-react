@@ -4,8 +4,7 @@ import Header from "../../components/Header";
 import GalleryCart from "../../components/GalleryCart";
 import Form from "../../components/Form";
 
-import { getData } from "../../api";
-import { HAMSTERS_URL, API_URL } from "../../constants";
+import { getData, deleteData } from "../../api";
 import Loading from "../../components/Loading";
 
 import "./Gallery.css";
@@ -16,20 +15,19 @@ export default function Gallery() {
   let [hamsters, setHamsters] = useState([]);
   let [openForm, setOpenForm] = useState(false);
 
-  useEffect(() => {
-    getData(API_URL + HAMSTERS_URL)
+  const getHamsters = () => {
+    getData()
       .then((data) => {
-        console.log(data);
         setHamsters((hamsters = data));
       })
       .finally(() => {
         setLoading((loading = false));
       });
-  }, []);
-
-  const deleteHamster = (id) => {
-    console.log(id);
   };
+
+  useEffect(() => {
+    getHamsters();
+  }, []);
 
   const showDataDeletionPopup = (id) => {
     setOpen((open = id));
@@ -43,11 +41,28 @@ export default function Gallery() {
     setOpenForm((openForm = bool));
   };
 
+  const toggleLoading = (bool) => {
+    setLoading((loading = bool));
+  };
+
+  const deleteHamster = (id) => {
+    toggleLoading(true);
+    deleteData(id).then((data) => {
+      getHamsters();
+      hideDataDeletionPopup();
+    });
+  };
+
   return (
     <div className="page-wrapper">
       <Header />
       {loading && <Loading />}
-      <Form open={openForm} togglePopupForm={togglePopupForm} />
+      <Form
+        open={openForm}
+        togglePopupForm={togglePopupForm}
+        getHamsters={getHamsters}
+        toggleLoading={toggleLoading}
+      />
       <div className="container">
         <div className="box-show-form">
           <h1 className="gallery-title">add hamster data to database</h1>
