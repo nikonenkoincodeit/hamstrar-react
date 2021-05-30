@@ -1,17 +1,24 @@
-import { useState } from "react";
-import Header from "../../components/Header";
-import Form from "../../components/Form";
+import { useState, useEffect } from "react";
 
-import { v4 as uuidv4 } from "uuid";
+import Header from "../../components/Header";
+import GalleryCart from "../../components/GalleryCart";
+import Form from "../../components/Form";
+import { getData } from "../../api";
+import { HAMSTERS_URL, API_URL } from "../../constants";
+
 import "./Gallery.css";
-import imgH2 from "../../assets/images/1618560680_8.jpg";
 
 export default function Gallery() {
-  const array = [1, 2, 3, 1, 1, 1, 1, 1, 1];
-
   let [open, setOpen] = useState(-1);
-
+  let [hamsters, setHamsters] = useState([]);
   let [openForm, setOpenForm] = useState(false);
+
+  useEffect(() => {
+    getData(API_URL + HAMSTERS_URL).then((data) => {
+      console.log(data);
+      setHamsters((hamsters = data));
+    });
+  }, []);
 
   const deleteHamster = (id) => {
     console.log(id);
@@ -46,40 +53,13 @@ export default function Gallery() {
         </div>
 
         <div className="box-gallery">
-          {array.map((item, index) => {
-            return (
-              <div className="gallery-cart" key={uuidv4()}>
-                <div
-                  className="btn-delete"
-                  onClick={() => showDataDeletionPopup(index)}
-                >
-                  &#10006;
-                </div>
-                <img src={imgH2} alt="" />
-                {index === open && (
-                  <div className="overlay">
-                    <p>delete?</p>
-                    <div className="box-btns">
-                      <button
-                        type="button"
-                        className="btn-yes"
-                        onClick={() => deleteHamster(index)}
-                      >
-                        yes
-                      </button>
-                      <button
-                        type="button"
-                        className="btn-no"
-                        onClick={hideDataDeletionPopup}
-                      >
-                        no
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+          <GalleryCart
+            open={open}
+            hamsters={hamsters}
+            deleteHamster={deleteHamster}
+            showDataDeletionPopup={showDataDeletionPopup}
+            hideDataDeletionPopup={hideDataDeletionPopup}
+          />
         </div>
       </div>
     </div>
