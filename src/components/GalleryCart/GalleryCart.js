@@ -9,14 +9,7 @@ export default function GalleryCart({
   hideDataDeletionPopup,
 }) {
   const images_url = BASE_URL + IMG_URL;
-  //   console.log(
-  //     "hamsters ",
-  //     hamsters,
-  //     deleteHamster,
-  //     showDataDeletionPopup,
-  //     hideDataDeletionPopup
-  //   );
-  //   return <div></div>;
+
   return hamsters.map(({ imgName, id }, index) => {
     return (
       <div className="gallery-cart" key={uuidv4()}>

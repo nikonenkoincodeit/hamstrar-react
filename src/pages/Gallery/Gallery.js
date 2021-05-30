@@ -3,21 +3,28 @@ import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import GalleryCart from "../../components/GalleryCart";
 import Form from "../../components/Form";
+
 import { getData } from "../../api";
 import { HAMSTERS_URL, API_URL } from "../../constants";
+import Loading from "../../components/Loading";
 
 import "./Gallery.css";
 
 export default function Gallery() {
   let [open, setOpen] = useState(-1);
+  let [loading, setLoading] = useState(true);
   let [hamsters, setHamsters] = useState([]);
   let [openForm, setOpenForm] = useState(false);
 
   useEffect(() => {
-    getData(API_URL + HAMSTERS_URL).then((data) => {
-      console.log(data);
-      setHamsters((hamsters = data));
-    });
+    getData(API_URL + HAMSTERS_URL)
+      .then((data) => {
+        console.log(data);
+        setHamsters((hamsters = data));
+      })
+      .finally(() => {
+        setLoading((loading = false));
+      });
   }, []);
 
   const deleteHamster = (id) => {
@@ -39,6 +46,7 @@ export default function Gallery() {
   return (
     <div className="page-wrapper">
       <Header />
+      {loading && <Loading />}
       <Form open={openForm} togglePopupForm={togglePopupForm} />
       <div className="container">
         <div className="box-show-form">

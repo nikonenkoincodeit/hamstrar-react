@@ -4,8 +4,5 @@ export const getData = (url) => {
   return fetch(BASE_URL + url)
     .then((response) => response.json())
     .then((response) => response)
-    .catch((error) => console.log(error))
-    .finally(() => {
-      console.log("finally");
-    });
+    .catch((error) => console.log(error));
 };
