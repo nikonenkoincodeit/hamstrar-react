@@ -6,14 +6,7 @@ export default function History() {
     <div className="page-wrapper">
       <Header />
       <div className="container">
-        <div className="box-history">
-          <div className="history-card">
-            <h2 className="history-card-title">winners/games</h2>
-            <ul>
-              <li></li>
-            </ul>
-          </div>
-        </div>
+        <div className="box-history"></div>
       </div>
     </div>
   );
