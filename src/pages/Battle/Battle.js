@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import HamsterCart from "../../components/HamsterCart";
 import Loading from "../../components/Loading";
-import { getRandomData, updateDate } from "../../api";
+import { getRandomData, updateDate, addMatches } from "../../api";
 
 import "./Battle.css";
 
@@ -51,16 +51,22 @@ export default function Battle() {
     if (!!winner) {
       setWinner((winner = index));
       let arrayData = [];
-
+      let matches = {};
       randomData.forEach((item, i) => {
         let a = { ...item };
-        if (index !== i) a.defeats = Number(a.defeats) + 1;
-        else a.wins = Number(a.wins) + 1;
+
+        if (index !== i) {
+          a.defeats = Number(a.defeats) + 1;
+          matches.loserId = { imgName: a.imgName, name: a.name };
+        } else {
+          a.wins = Number(a.wins) + 1;
+          matches.winnerId = { imgName: a.imgName, name: a.name };
+        }
         a.games = Number(a.games) + 1;
         arrayData.push(a);
         updateDate(a, a.id).then((data) => data);
       });
-
+      addMatches(matches).then((data) => console.log(data));
       setRandomData((randomData = [...arrayData]));
     }
   };

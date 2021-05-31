@@ -1,4 +1,5 @@
-import { BASE_URL, HAMSTERS_URL, RANDOM_URL } from "../constants";
+import { BASE_URL, HAMSTERS_URL, RANDOM_URL, MATCHES_URL } from "../constants";
+import { showErrorMessage } from "../util";
 
 const myHeaders = new Headers({
   Accept: "application/json",
@@ -9,7 +10,7 @@ export const getData = (url) => {
   return fetch(BASE_URL + HAMSTERS_URL)
     .then((response) => response.json())
     .then((response) => response)
-    .catch((error) => console.log(error));
+    .catch((error) => showErrorMessage(error));
 };
 
 export const deleteData = (id) => {
@@ -19,7 +20,7 @@ export const deleteData = (id) => {
   })
     .then((response) => response.json())
     .then((response) => response)
-    .catch((error) => console.log("error", error));
+    .catch((error) => showErrorMessage(error));
 };
 
 export const addData = (data) => {
@@ -32,14 +33,14 @@ export const addData = (data) => {
   return fetch(BASE_URL + HAMSTERS_URL, requestOptions)
     .then((response) => response.json())
     .then((response) => response)
-    .catch((error) => console.log("error", error));
+    .catch((error) => showErrorMessage(error));
 };
 
 export const getRandomData = () => {
   return fetch(BASE_URL + HAMSTERS_URL + RANDOM_URL)
     .then((response) => response.json())
     .then((response) => response)
-    .catch((error) => console.log("error", error));
+    .catch((error) => showErrorMessage(error));
 };
 
 export const updateDate = (data, id) => {
@@ -53,5 +54,19 @@ export const updateDate = (data, id) => {
   return fetch(BASE_URL + HAMSTERS_URL + id, requestOptions)
     .then((response) => response.json())
     .then((response) => response)
-    .catch((error) => console.log("error", error));
+    .catch((error) => showErrorMessage(error));
+};
+
+export const addMatches = (data) => {
+  var requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: JSON.stringify(data),
+    redirect: "follow",
+  };
+
+  return fetch(BASE_URL + MATCHES_URL, requestOptions)
+    .then((response) => response.json())
+    .then((response) => response)
+    .catch((error) => showErrorMessage(error));
 };
