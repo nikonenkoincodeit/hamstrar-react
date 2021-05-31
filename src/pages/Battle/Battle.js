@@ -71,6 +71,7 @@ export default function Battle() {
       {loading && <Loading />}
       <div className="container">
         <div className="box-battle">
+          <div></div>
           {randomData.length > 1 && (
             <HamsterCart
               index={0}
@@ -86,7 +87,7 @@ export default function Battle() {
               next battle
             </button>
           </h1>
-
+          <div></div>
           {randomData.length > 1 && (
             <HamsterCart
               index={1}
