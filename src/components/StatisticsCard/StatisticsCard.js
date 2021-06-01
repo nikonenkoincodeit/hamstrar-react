@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 export default function StatisticsCard({ data, params, title }) {
   console.log(data);
   return (
@@ -7,7 +8,7 @@ export default function StatisticsCard({ data, params, title }) {
         {data.map((item, index) => {
           index += 1;
           return (
-            <li className="hamster">
+            <li className="hamster" key={uuidv4()}>
               <span>
                 {index}. {item.name}
               </span>

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import HamsterCart from "../../components/HamsterCart";
 import Loading from "../../components/Loading";
-import { getRandomData, updateDate, addMatches } from "../../api";
+import { getData, updateDate, addMatches } from "../../api";
+import { BASE_URL, HAMSTERS_URL, RANDOM_URL } from "../../constants";
 
 import "./Battle.css";
 
@@ -19,11 +20,11 @@ export default function Battle() {
     setRandomData((randomData = []));
     toggleLoading(true);
     let array = [];
-    const a = getRandomData().then((data) => {
+    const a = getData(BASE_URL + HAMSTERS_URL + RANDOM_URL).then((data) => {
       array[0] = data;
       return data;
     });
-    const b = getRandomData().then((data) => {
+    const b = getData(BASE_URL + HAMSTERS_URL + RANDOM_URL).then((data) => {
       array[1] = data;
       return data;
     });

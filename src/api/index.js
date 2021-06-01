@@ -1,4 +1,4 @@
-import { BASE_URL, HAMSTERS_URL, RANDOM_URL, MATCHES_URL } from "../constants";
+import { BASE_URL, HAMSTERS_URL, MATCHES_URL } from "../constants";
 import { showErrorMessage } from "../util";
 
 const myHeaders = new Headers({
@@ -6,67 +6,53 @@ const myHeaders = new Headers({
   "Content-Type": "application/json",
 });
 
-export const getData = (url) => {
-  return fetch(BASE_URL + HAMSTERS_URL)
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  redirect: "follow",
+};
+
+const getDataServer = (url, options) => {
+  return fetch(url, options)
     .then((response) => response.json())
     .then((response) => response)
     .catch((error) => showErrorMessage(error));
 };
 
-export const deleteData = (id) => {
-  return fetch(BASE_URL + HAMSTERS_URL + id, {
-    method: "DELETE",
-    redirect: "follow",
-  })
-    .then((response) => response.json())
-    .then((response) => response)
-    .catch((error) => showErrorMessage(error));
+export const getData = async (url) => {
+  requestOptions.method = "GET";
+  delete requestOptions.body;
+  const result = await getDataServer(url, requestOptions);
+  return result;
+};
+
+export const deleteData = (id, key) => {
+  requestOptions.method = "DELETE";
+  const url = BASE_URL + key + id;
+  const result = getDataServer(url, requestOptions);
+  return result;
 };
 
 export const addData = (data) => {
-  const requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: JSON.stringify(data),
-  };
-
-  return fetch(BASE_URL + HAMSTERS_URL, requestOptions)
-    .then((response) => response.json())
-    .then((response) => response)
-    .catch((error) => showErrorMessage(error));
-};
-
-export const getRandomData = () => {
-  return fetch(BASE_URL + HAMSTERS_URL + RANDOM_URL)
-    .then((response) => response.json())
-    .then((response) => response)
-    .catch((error) => showErrorMessage(error));
+  requestOptions.method = "POST";
+  requestOptions.body = JSON.stringify(data);
+  const url = BASE_URL + HAMSTERS_URL;
+  const result = getDataServer(url, requestOptions);
+  return result;
 };
 
 export const updateDate = (data, id) => {
-  var requestOptions = {
-    method: "PUT",
-    headers: myHeaders,
-    body: JSON.stringify(data),
-    redirect: "follow",
-  };
-
-  return fetch(BASE_URL + HAMSTERS_URL + id, requestOptions)
-    .then((response) => response.json())
-    .then((response) => response)
-    .catch((error) => showErrorMessage(error));
+  requestOptions.method = "PUT";
+  requestOptions.body = JSON.stringify(data);
+  const url = BASE_URL + HAMSTERS_URL + id;
+  const result = getDataServer(url, requestOptions);
+  return result;
 };
 
 export const addMatches = (data) => {
-  var requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: JSON.stringify(data),
-    redirect: "follow",
-  };
-
-  return fetch(BASE_URL + MATCHES_URL, requestOptions)
-    .then((response) => response.json())
-    .then((response) => response)
-    .catch((error) => showErrorMessage(error));
+  requestOptions.method = "POST";
+  requestOptions.body = JSON.stringify(data);
+  const url = BASE_URL + MATCHES_URL;
+  const result = getDataServer(url, requestOptions);
+  return result;
 };

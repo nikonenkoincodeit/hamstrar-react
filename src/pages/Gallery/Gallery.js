@@ -6,7 +6,7 @@ import Form from "../../components/Form";
 
 import { getData, deleteData } from "../../api";
 import Loading from "../../components/Loading";
-
+import { BASE_URL, HAMSTERS_URL } from "../../constants";
 import "./Gallery.css";
 
 export default function Gallery() {
@@ -16,7 +16,7 @@ export default function Gallery() {
   let [openForm, setOpenForm] = useState(false);
 
   const getHamsters = () => {
-    getData()
+    getData(BASE_URL + HAMSTERS_URL)
       .then((data) => {
         setHamsters((hamsters = data));
       })
@@ -47,7 +47,7 @@ export default function Gallery() {
 
   const deleteHamster = (id) => {
     toggleLoading(true);
-    deleteData(id).then((data) => {
+    deleteData(id, HAMSTERS_URL).then((data) => {
       getHamsters();
       hideDataDeletionPopup();
     });

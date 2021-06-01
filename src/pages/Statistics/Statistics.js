@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import StatisticsCard from "../../components/StatisticsCard";
 import Loading from "../../components/Loading";
 import { getDatasetOfWinnersOrLosers } from "../../util";
+import { BASE_URL, HAMSTERS_URL } from "../../constants";
 import "./Statistics.css";
 
 export default function Statistics() {
@@ -13,7 +14,7 @@ export default function Statistics() {
   let [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getData()
+    getData(BASE_URL + HAMSTERS_URL)
       .then((data) => {
         setWinners((winners = getDatasetOfWinnersOrLosers("wins", data)));
         setLoosers((loosers = getDatasetOfWinnersOrLosers("defeats", data)));
