@@ -3,22 +3,6 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 
 export default function Home() {
-  // const textInput = createRef();
-
-  // const [output, setOutput] = useState("hello");
-
-  // const f1 = (payload) => () => {
-  //   console.log(payload);
-  // };
-  // const f2 = () => {
-  //   console.log(this);
-  //   console.log("over");
-  // };
-  // const f3 = (event) => {
-  //   setOutput(textInput.current.value);
-  //   //console.log(event.target.value)
-  // };
-
   return (
     <>
       <div className="hunter">

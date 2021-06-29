@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import HamsterCart from "../../components/HamsterCart";
 import Loading from "../../components/Loading";
-import { getData, updateDate, addMatches } from "../../api";
+import { getData, updateDate } from "../../api";
 import { BASE_URL, HAMSTERS_URL, RANDOM_URL } from "../../constants";
 
 import "./Battle.css";
 
 export default function Battle() {
+  const controller = new AbortController();
+  const signal = controller.signal;
+
   let [randomData, setRandomData] = useState([]);
   let [loading, setLoading] = useState(true);
   let [winner, setWinner] = useState(-1);
@@ -20,14 +23,18 @@ export default function Battle() {
     setRandomData((randomData = []));
     toggleLoading(true);
     let array = [];
-    const a = getData(BASE_URL + HAMSTERS_URL + RANDOM_URL).then((data) => {
-      array[0] = data;
-      return data;
-    });
-    const b = getData(BASE_URL + HAMSTERS_URL + RANDOM_URL).then((data) => {
-      array[1] = data;
-      return data;
-    });
+    const a = getData(BASE_URL + HAMSTERS_URL + RANDOM_URL, signal).then(
+      (data) => {
+        array[0] = data;
+        return data;
+      }
+    );
+    const b = getData(BASE_URL + HAMSTERS_URL + RANDOM_URL, signal).then(
+      (data) => {
+        array[1] = data;
+        return data;
+      }
+    );
 
     Promise.all([a, b]).then((data) => {
       if (array[0].id === array[1].id) {
@@ -46,6 +53,9 @@ export default function Battle() {
 
   useEffect(() => {
     createArrayRandomData();
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   const getIdHamster = (index) => {
@@ -67,7 +77,6 @@ export default function Battle() {
         arrayData.push(a);
         updateDate(a, a.id).then((data) => data);
       });
-      addMatches(matches).then((data) => console.log(data));
       setRandomData((randomData = [...arrayData]));
     }
   };

@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
 export default function StatisticsCard({ data, params, title }) {
-  console.log(data);
   return (
     <div className="statistics-card">
       <h2 className="statistics-card-title">{title}/games</h2>

@@ -10,13 +10,16 @@ import { BASE_URL, HAMSTERS_URL } from "../../constants";
 import "./Gallery.css";
 
 export default function Gallery() {
+  const controller = new AbortController();
+  const signal = controller.signal;
+
   let [open, setOpen] = useState(-1);
   let [loading, setLoading] = useState(true);
   let [hamsters, setHamsters] = useState([]);
   let [openForm, setOpenForm] = useState(false);
 
   const getHamsters = () => {
-    getData(BASE_URL + HAMSTERS_URL)
+    getData(BASE_URL + HAMSTERS_URL, signal)
       .then((data) => {
         setHamsters((hamsters = data));
       })
@@ -27,6 +30,9 @@ export default function Gallery() {
 
   useEffect(() => {
     getHamsters();
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   const showDataDeletionPopup = (id) => {

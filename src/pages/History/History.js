@@ -9,11 +9,14 @@ import { BASE_URL, MATCHES_URL } from "../../constants";
 import "./History.css";
 
 export default function History() {
+  const controller = new AbortController();
+  const signal = controller.signal;
+
   let [matches, setMatches] = useState([]);
   let [loading, setLoading] = useState(true);
 
   const getMatches = () => {
-    getData(BASE_URL + MATCHES_URL)
+    getData(BASE_URL + MATCHES_URL, signal)
       .then((data) => {
         setMatches((matches = data));
       })
@@ -31,6 +34,9 @@ export default function History() {
 
   useEffect(() => {
     getMatches();
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   return (
